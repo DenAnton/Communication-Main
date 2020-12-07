@@ -5,6 +5,7 @@ class App {
         this.button = document.querySelector('#button');
         this.meals = [];
     }
+
     async searchMeal(inputValue){
         try{
             const res = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${inputValue}`);
@@ -28,28 +29,30 @@ class App {
             console.log(this.meals)
         } catch(error){
             console.log(error)
-        }
-        
-    }
+        }      
+    } 
+
     run(){
         this.addEventListeners();
         this.searchMeal();
     }
+
     addEventListeners() {
         this.button.addEventListener('click', (e) => {
             e.preventDefault();
-            console.log("works");
             const searchStr = this.searchInputE.value;
             this.searchMeal(searchStr);
             console.log(searchStr)
         });
         
-        this.searchInputE.addEventListener('keyup',(event) => {
-            if(event.code == 'Enter')
-            this.button.click()
-        })
-
-        
+        /* this.searchInputE.addEventListener('keyup',(event) => {
+            event.preventDefault()
+            if(event.keyCode === 13) {
+                event.preventDefault()
+                this.button.click()
+            }
+            
+        }) */
     }
 }
 
