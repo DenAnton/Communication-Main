@@ -51,7 +51,7 @@ class App {
                 event.preventDefault()
                 this.button.click()
             }
-            
+            testtesttest
         }) */
     }
 }
