@@ -1,7 +1,7 @@
 class App {
     constructor(){
         this.searchInputE = document.querySelector('.search-input');
-        this.wrapper = document.querySelector('.wrapper');
+        this.list = document.querySelector('#list');
         this.button = document.querySelector('#button');
         this.meals = [];
     }
@@ -15,11 +15,15 @@ class App {
 
             const json = await res.json();
             this.meals = json.meals;
+            this.list.innerHTML = ''
             for (let i = 0; i < this.meals.length; i++) {
-                this.wrapper.innerHTML += `
+                this.list.innerHTML += `
+                <li>
                     <h2>${this.meals[i].strMeal}</h2>
+                    <img src="${this.meals[i].strMealThumb}"></img>
                     <p>${this.meals[i].strInstructions}</p>
-                `;
+                    <hr>
+                </li>`;
             }
             console.log(this.meals)
         } catch(error){
@@ -37,10 +41,18 @@ class App {
             console.log("works");
             const searchStr = this.searchInputE.value;
             this.searchMeal(searchStr);
+            console.log(searchStr)
         });
+        
+        this.searchInputE.addEventListener('keyup',(event) => {
+            if(event.code == 'Enter')
+            this.button.click()
+        })
+
+        
     }
 }
 
 const app = new App();
-app.run(); 
+app.run();
 
